@@ -1,11 +1,16 @@
 const mongoose = require("mongoose");
+const recipientSchema = require("./Recipient");
 
-const userSchema = new mongoose.Schema({
-  googleId: {
-    type: String,
-    required: true,
-  },
-  credits: { type: Number, default: 0 },
+const surveySchema = new mongoose.Schema({
+  title: String,
+  body: String,
+  subject: String,
+  recipients: [recipientSchema],
+  yes: { type: Number, default: 0 },
+  no: { type: Number, default: 0 },
+  _user: { type: mongoose.Types.ObjectId, ref: "User" },
+  dateSent: Date,
+  lastResponded: Date,
 });
 
-module.exports = mongoose.model("users", userSchema);
+module.exports = mongoose.model("surveys", surveySchema);
