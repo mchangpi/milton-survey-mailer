@@ -9,7 +9,11 @@ if (process.env.NODE_ENV === "development") {
   require("dotenv").config();
 }
 
-router.post("/api/surveys", requireLogin, requireCredits, (req, resp) => {
+router.get("/api/surveys/thanks", (req, resp) => {
+  resp.send("Thanks for voting!");
+});
+
+router.post("/api/surveys", requireLogin, requireCredits, async (req, resp) => {
   const { title, subject, body, recipients } = req.body;
   const survey = new Survey({
     title,
@@ -22,7 +26,15 @@ router.post("/api/surveys", requireLogin, requireCredits, (req, resp) => {
     dateSent: Date.now(),
   });
   const mailer = new Mailer(survey, template(survey));
-  mailer.send();
+  try {
+    await mailer.send();
+    await survey.save();
+    req.user.credits -= 1;
+    const user = await req.user.save();
+    resp.send(user);
+  } catch (err) {
+    resp.status(422).send(err);
+  }
 });
 
 module.exports = router;
