@@ -8,7 +8,7 @@ import reduxThunk from "redux-thunk";
 import App from "./components/App";
 import reducers from "./reducers";
 
-//testing in the browser
+/* //testing in the browser
 import axios from "axios";
 window.axios = axios;
 const survey = {
@@ -16,7 +16,7 @@ const survey = {
   subject: "Give Us feedback",
   body: "We would love the hear you if you enjoy our services",
   recipients: "mchangpi@gmail.com",
-};
+};*/
 
 const initState = {};
 
