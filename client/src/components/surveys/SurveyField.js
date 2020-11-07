@@ -1,11 +1,19 @@
 import React from "react";
 
 const SurveyField = (props) => {
-  //console.log("SurveyField input callback ", props.input);
-  const eventHandler = props.input;
+  const {
+    label,
+    input,
+    meta: { error, touched },
+  } = props;
+  console.log("meta ", props.meta);
   return (
     <div>
-      <input {...eventHandler} />
+      <label>{label}</label>
+      <input {...input} style={{ marginBottom: "5px" }} />
+      <div className="red-text" style={{ marginBottom: "20px" }}>
+        {touched && error}
+      </div>
     </div>
   );
 };
