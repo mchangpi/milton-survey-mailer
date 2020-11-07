@@ -1,9 +1,11 @@
 import React from "react";
 
-const SurveyField = () => {
+const SurveyField = (props) => {
+  //console.log("SurveyField input callback ", props.input);
+  const eventHandler = props.input;
   return (
     <div>
-      <input />
+      <input {...eventHandler} />
     </div>
   );
 };
