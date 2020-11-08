@@ -6,7 +6,7 @@ const SurveyField = (props) => {
     input,
     meta: { error, touched },
   } = props;
-  console.log("meta ", props.meta);
+  //console.log("meta ", props.meta);
   return (
     <div>
       <label>{label}</label>
