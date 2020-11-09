@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node index",
-    "test": "NODE_ENV='development' node index",
     "client": "npm run start --prefix client",
-    "dev": "NODE_ENV='development' concurrently 'nodemon index' 'npm run client'",
+    "webhook": "lt -p 5000 -s miltonmerndemo",
+    "dev": "NODE_ENV='development' concurrently 'nodemon index' 'npm run client' 'npm run webhook'",
     "install-client": "npm install --prefix client",
     "build-client": "npm run build --prefix client",
     "heroku-postbuild": "npm run install-client && npm run build-client"
@@ -18,15 +18,18 @@
     "body-parser": "^1.19.0",
     "cookie-session": "^1.4.0",
     "express": "^4.17.1",
-    "mongoose": "^5.10.11",
+    "lodash": "^4.17.20",
+    "mongoose": "^5.10.13",
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
+    "path-parser": "^6.1.0",
     "redux-form": "^8.3.6",
     "sendgrid": "^5.2.3",
-    "stripe": "^8.119.0"
+    "stripe": "^8.120.0"
   },
   "devDependencies": {
     "dotenv": "^8.2.0",
+    "localtunnel": "^2.0.0",
     "nodemon": "^2.0.6"
   }
 }

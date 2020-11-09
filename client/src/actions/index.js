@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FETCH_USER, SUBMIT_SURVEY } from "./types";
+import { FETCH_USER } from "./types";
 
 export const updateAuth = () => async (dispatch) => {
   const result = await axios.get("/api/current_user");

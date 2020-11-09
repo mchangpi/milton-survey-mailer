@@ -19,6 +19,7 @@ const SurveyFormReview = (props) => {
     <div>
       <h5>Please confirm your entries</h5>
       {reviewFields}
+      <hr style={{ marginBottom: "20px" }} />
       <button
         className="orange darken-2 btn-flat white-text"
         onClick={onCancel}
