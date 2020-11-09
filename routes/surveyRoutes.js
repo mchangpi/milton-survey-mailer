@@ -46,7 +46,10 @@ router.post("/api/surveys", requireLogin, requireCredits, async (req, resp) => {
 });
 
 router.get("/api/surveys/:surveyId/:choice", (req, resp) => {
-  resp.send("Thanks for voting!");
+  resp.send(`
+		Thanks for voting! Your voting will be updated within one minute.<br>
+		Please redirect to <a href="${process.env.REDIRECT_DOMAIN}/surveys">Milton Survey Mailer</a>
+  `);
 });
 
 router.post("/api/surveys/webhooks", (req, resp) => {

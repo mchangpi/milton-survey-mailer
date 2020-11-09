@@ -5,6 +5,7 @@ router.get(
   "/auth/google",
   passport.authenticate("google", { scope: ["profile", "email"] })
 );
+
 router.get(
   "/auth/google/callback",
   passport.authenticate("google"),
@@ -21,7 +22,7 @@ router.get("/api/logout", (req, resp) => {
 
 router.get("/api/current_user", (req, resp) => {
   //resp.json(req.session);
-  resp.json(req.user);
+  resp.send(req.user);
 });
 
 module.exports = router;
