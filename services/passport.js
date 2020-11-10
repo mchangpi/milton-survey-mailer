@@ -17,7 +17,7 @@ const strategy = new GoogleStrategy(
   async (accessToken, refreshToken, profile, done) => {
     //console.log("profile ", profile);
     try {
-      const user = await User.findOne({ googleId: profile.id });
+      let user = await User.findOne({ googleId: profile.id });
       if (!user) {
         user = await new User({
           googleId: profile.id,
