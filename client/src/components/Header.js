@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Payments from "./Payments";
+import "./custom.css";
 
 class Header extends Component {
   renderContent = () => {
-    switch (this.props.auth) {
+    const { auth } = this.props;
+    switch (auth) {
       case null:
         return "";
       case false:
@@ -17,7 +19,10 @@ class Header extends Component {
       default:
         return [
           <li key="3" style={{ margin: "0 10px" }}>
-            Credits: {this.props.auth.credits}
+            {auth.credits > 0
+              ? "Credits: "
+              : "No credit, Please add credits first! "}
+            {auth.credits > 0 && auth.credits}
           </li>,
           <li key="1">
             <Payments />
@@ -37,7 +42,7 @@ class Header extends Component {
           <Link
             to={this.props.auth ? "/surveys" : "/"}
             className="left brand-logo"
-            style={{ marginLeft: "10px" }}
+            style={{ padding: "0 10px" }}
           >
             Survey Mailer
           </Link>
