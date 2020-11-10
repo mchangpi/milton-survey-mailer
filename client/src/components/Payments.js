@@ -16,7 +16,7 @@ class Payments extends Component {
         }}
         stripeKey={process.env.REACT_APP_STRIPE_PUBLIC_KEY}
       >
-        <button className="btn">Add Credits</button>
+        <button className="teal lighten-2 btn">Add Credits</button>
       </StripeCheckout>
     );
   }

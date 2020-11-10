@@ -84,4 +84,12 @@ router.post("/api/surveys/webhooks", (req, resp) => {
   resp.send({});
 });
 
+router.delete("/api/survey/:surveyId", requireLogin, async (req, resp) => {
+  const { surveyId } = req.params;
+  //console.log("delete survey id ", surveyId);
+
+  await Survey.findByIdAndRemove(surveyId);
+  resp.send({});
+});
+
 module.exports = router;

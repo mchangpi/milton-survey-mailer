@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchSurveys } from "../../actions";
@@ -6,6 +7,13 @@ class SurveyList extends Component {
   componentDidMount() {
     this.props.fetchSurveys();
   }
+
+  // pass surveyId to backend
+  deleteSurvey = async (surveyId) => {
+    //console.log("surveyId ", surveyId);
+    await axios.delete("/api/survey/" + surveyId);
+    this.props.fetchSurveys();
+  };
 
   renderSurveys = () => {
     return this.props.surveys.reverse().map((survey) => {
@@ -21,6 +29,13 @@ class SurveyList extends Component {
           <div className="card-action">
             <a className="blue-text">Yes: {survey.yes}</a>
             <a className="blue-text">No: {survey.no}</a>
+            <a
+              className="waves-effect waves-light right red lighten-2 btn-flat white-text"
+              style={{ marginTop: "-5px" }}
+              onClick={() => this.deleteSurvey(survey._id)}
+            >
+              <i className="material-icons right">delete</i>delete
+            </a>
           </div>
         </div>
       );
