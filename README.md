@@ -1,4 +1,4 @@
-Hello, this is a Web App built with Node.js and React.js<br>
+Hello, this is a Web App which sends survey emails<br>
 You could log in with your Google account<br>
 Add credits with the test credit card<br>
 Then you could send survey emails<br>
