@@ -23,7 +23,7 @@ class SurveyList extends Component {
             <span className="card-title">{survey.title}</span>
             <p>{survey.body}</p>
             <p className="right">
-              Sent on: {new Date(survey.dateSent).toLocaleDateString()}
+              Sent on: {new Date(survey.dateSent).toLocaleString()}
             </p>
           </div>
           <div className="card-action">

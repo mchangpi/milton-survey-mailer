@@ -9,7 +9,7 @@ const SurveyFormReview = (props) => {
   const { onCancel, formValues, submitSurvey, history } = props;
   const reviewFields = _.map(formFields, ({ name, label }) => {
     return (
-      <div key={name}>
+      <div key={name} style={{ marginBottom: "30px" }}>
         <label>{label}</label>
         <div>{formValues[name]}</div>
       </div>
@@ -17,7 +17,8 @@ const SurveyFormReview = (props) => {
   });
   return (
     <div>
-      <h5>Please confirm your entries</h5>
+      <h6 style={{ marginBottom: "20px" }}>Please confirm your entries:</h6>
+      <hr />
       {reviewFields}
       <hr style={{ marginBottom: "20px" }} />
       <button
