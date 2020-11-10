@@ -5,6 +5,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  email: String,
   credits: { type: Number, default: 0 },
 });
 

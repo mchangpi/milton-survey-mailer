@@ -13,9 +13,12 @@ if (process.env.NODE_ENV === "development") {
 }
 
 router.get("/api/surveys", requireLogin, async (req, resp) => {
-  const surveys = await Survey.find({ _user: req.user.id }).select({
-    recipients: false,
-  });
+  //const surveys = await Survey.find({ _user: req.user.id }).select({
+  const surveys = await Survey.find()
+    .populate({ path: "_user", model: "users", select: "email" })
+    .select({
+      recipients: false,
+    });
 
   //console.log("surveys ", surveys);
   resp.send(surveys);
@@ -85,12 +88,26 @@ router.post("/api/surveys/webhooks", (req, resp) => {
   resp.send({});
 });
 
-router.delete("/api/survey/:surveyId", requireLogin, async (req, resp) => {
-  const { surveyId } = req.params;
-  //console.log("delete survey id ", surveyId);
+router.delete(
+  "/api/survey/:userId/:surveyId",
+  requireLogin,
+  async (req, resp) => {
+    const { userId, surveyId } = req.params;
+    /*console.log(
+      "req.userId " +
+        req.user._id +
+        " userId " +
+        userId +
+        " surveyId " +
+        surveyId
+    );*/
+    if (req.user._id.toString() !== userId.toString()) {
+      return resp.status(401).send({ error: "Not authorized!" });
+    }
 
-  await Survey.findByIdAndRemove(surveyId);
-  resp.send({});
-});
+    await Survey.findByIdAndDelete(surveyId);
+    resp.send({});
+  }
+);
 
 module.exports = router;

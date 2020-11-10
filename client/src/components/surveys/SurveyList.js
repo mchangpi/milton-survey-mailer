@@ -9,9 +9,9 @@ class SurveyList extends Component {
   }
 
   // pass surveyId to backend
-  deleteSurvey = async (surveyId) => {
+  deleteSurvey = async (userId, surveyId) => {
     //console.log("surveyId ", surveyId);
-    await axios.delete("/api/survey/" + surveyId);
+    await axios.delete("/api/survey/" + userId + "/" + surveyId);
     this.props.fetchSurveys();
   };
 
@@ -22,8 +22,12 @@ class SurveyList extends Component {
           <div className="card-content">
             <span className="card-title">{survey.title}</span>
             <p>{survey.body}</p>
-            <p className="right">
-              Sent on: {new Date(survey.dateSent).toLocaleString()}
+            <p className="right" style={{ marginTop: "-20px" }}>
+              <span className="right">
+                Sent on: {new Date(survey.dateSent).toLocaleDateString()}
+              </span>
+              <br />
+              <span className="right">Created by: {survey._user.email}</span>
             </p>
           </div>
           <div className="card-action">
@@ -32,7 +36,7 @@ class SurveyList extends Component {
             <a
               className="waves-effect waves-light right red lighten-2 btn-flat white-text"
               style={{ marginTop: "-5px" }}
-              onClick={() => this.deleteSurvey(survey._id)}
+              onClick={() => this.deleteSurvey(survey._user._id, survey._id)}
             >
               <i className="material-icons right">delete</i>delete
             </a>

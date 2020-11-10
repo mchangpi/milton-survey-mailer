@@ -15,11 +15,14 @@ const strategy = new GoogleStrategy(
     proxy: true,
   },
   async (accessToken, refreshToken, profile, done) => {
-    //console.log('profile id ', profile.id);
+    //console.log("profile ", profile);
     try {
       const user = await User.findOne({ googleId: profile.id });
       if (!user) {
-        user = await new User({ googleId: profile.id }).save();
+        user = await new User({
+          googleId: profile.id,
+          email: profile.emails[0].value,
+        }).save();
       }
       done(null, user);
     } catch (e) {
